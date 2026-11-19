@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 过门与判重｜探店执行手册</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317365D'/%3E%3Crect x='6' y='7' width='20' height='2.5' fill='%23FFFFFF'/%3E%3Crect x='6' y='14' width='14' height='2.5' fill='%23FFFFFF'/%3E%3Crect x='6' y='21' width='17' height='2.5' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">探店执行手册 <span class="en">Store Playbook</span></a>
+    <nav class="topnav" aria-label="模块导航">
+      <a href="index.html">总览</a>
+      <a href="01-search.html">01 搜帖</a>
+      <a href="02-gate.html" aria-current="page">02 过门判重</a>
+      <a href="03-apply.html">03 报名</a>
+      <a href="04-ledger.html">04 记账复盘</a>
+      <a href="05-deal.html">05 中签后</a>
+    </nav>
+  </div>
+</header>
+
+<main class="shell">
+
+  <div class="page-head">
+    <div class="crumb">02 / 05　GATES &amp; DEDUP</div>
+    <h1>过门与判重</h1>
+    <p class="goal">一条帖进详情，先按顺序过六道门；任意一道卡住直接退出。全过门再判重，最后才按品类排先后。</p>
+    <div class="meta-strip" style="margin-top:14px;border-top:none;padding-top:0">
+      <span>账号：小呆呆不呆呆 · 小红书号 Q19671165372</span>
+      <span>166 粉 · 382 关注 · IP 湖北 · 坐标武汉光谷</span>
+      <span>2025 级大二在读女生 · 探店置换口径</span>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2><span class="idx">2.1</span>六道门（按顺序过）</h2>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <colgroup><col style="width:15%"><col style="width:42%"><col style="width:43%"></colgroup>
+        <thead><tr><th>门</th><th>过门条件</th><th>卡住就跳过的情形</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-core">1 时间</span></td>
+            <td>发布在 7 天内</td>
+            <td>8 天前、上月发的；正文写「已收官 / 已截止 / 名额已满」；正文有效日期与发布时间矛盾（如 5 天前发布却写「即日起至 8 月 9 日」）属模板未更新，记待核不投</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-core">2 钱</span></td>
+            <td>全程零成本</td>
+            <td>押金、垫付、先买后返、团购、优惠券、付费合作、招商加盟、招募代理、返现；先尝后买、关注送小样、发笔记才领伴手礼/券，属促销不属免费置换；要求先在海外/旗舰店购买指定链接产品再返；要求加入福利群/活动群才参与抽选（助手不代加群）</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-core">3 地点</span></td>
+            <td>武汉到店；外地只接写清寄样/快递/邮寄/包邮的</td>
+            <td>外地线下到店且没写寄样；境外、港澳台、跨境</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-core">4 人群</span></td>
+            <td>招女生 / 素人 / 不限人群</td>
+            <td>只招男士、宝妈、婴童、孕妇、宠物专用品、限定某校学生</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-hard">5 粉丝/渠道门槛</span></td>
+            <td>不要求粉丝数或点评等级，或门槛当前账号能达到</td>
+            <td>千粉 / 500 粉 / 300 粉以上、大众点评 V 级、要主页往期作品且当前拿不出——跳过，不硬蹭；要求晒本人已有实拍素材（挂耳冲泡图、穿搭照、出镜实拍）当前没有，也跳</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-core">6 正文质量</span></td>
+            <td>去掉标题后正文 ≥ 40 字，有实质内容和报名入口</td>
+            <td>只有标签和空壳；纯菜品介绍、个人日记、攻略吐槽；互赞积赞、互勉约拍；纯带货商品帖（标售价、已售，无报名入口）；明星应援标签帖；正文/海报没写清是否包邮、是否关注、门槛不清的，不硬投记待核</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="note-title">过门顺序提示</span>
+      <ul>
+        <li>先看时间，再看钱。多数帖死在第二道——写着「免费」，细则里要买券。</li>
+        <li>第三道门最容易看走眼：「武汉」出现在标题，门店却在外地。</li>
+        <li>第五道是实测高频卡点：166 粉，近半合格帖死在千粉 / 500 粉 / 2000 粉 / 点评等级门槛上，看到就直接跳。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">2.2</span>判重：报过的一个都不能再报</h2>
+    <p class="sub">判重集合从台账现算，每天开工先加载；同品牌跨门店也算重复。</p>
+    <ul class="points">
+      <li><strong>品牌比对</strong>：标准品牌名、去括号核心词、去城市前缀、店名去地址后缀；同品牌跨店（如两家瓦伦丁）算同一家。</li>
+      <li><strong>标题比对</strong>：招募活动名归一化（去空格符号）后取前 6–20 字比对，拦「同一帖换个词又冒出来」。</li>
+      <li><strong>正文兜底</strong>：进详情取正文前 300 字再过一遍；两字小店名要拆词比，不能整串比。</li>
+      <li><strong>评论区复核</strong>：评论区已有本人「武汉光谷在读女生 / 小呆呆不呆呆」留言，说明报过了，跳过。</li>
+      <li><strong>两处复核</strong>：卡片阶段先用卡片文字过一遍；进详情后用正文再过一遍。</li>
+      <li>命中即换下一张卡，不凑数。宁可当天只报几家，也不拿报过的凑名额。</li>
+    </ul>
+    <div class="note">
+      <span class="note-title">白名单（不算品牌，避免误杀）</span>
+      商圈词（光谷 / 江汉路 / 楚河汉街 / 万松园 / 街道口 / 徐东 / 昙华林 / 武商梦时代 / 万象城 / 恒隆 / 群光 / 永旺 / K11 / 武汉天地）与通用品类词（探店招募 / 体验官 / 新店 / 试营业 / 打卡 / 火锅 / 奶茶 / 咖啡 / 甜品）不进判重。
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">2.3</span>实测排除清单（看着像招募，实际不是）</h2>
+    <p class="sub">这些类型这两天反复出现，进门看清性质就跳，不要被标题里的「免费 / 试吃 / 招募」带过去。</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <colgroup><col style="width:26%"><col style="width:46%"><col style="width:28%"></colgroup>
+        <thead><tr><th>类型</th><th>识别特征</th><th>结论</th></tr></thead>
+        <tbody>
+          <tr><td><strong>招聘 / 兼职 / 摊主招募</strong></td><td>招销售、帮工、出摊摊主；要经验、要连续到岗、小窗发自荐简历；给摊位或时薪补贴</td><td>排除，不是探店置换</td></tr>
+          <tr><td><strong>市集促销 / 先尝后买</strong></td><td>现场免费试吃但先尝后买；关注送小样、发笔记领伴手礼/优惠券，本质促销</td><td>排除，不算零成本置换</td></tr>
+          <tr><td><strong>活动 / 抽奖汇总</strong></td><td>买一送一、撕杯抽奖、券包攻略、本周活动合集、遛娃清单；汇总多条活动，无单店招募入口</td><td>排除</td></tr>
+          <tr><td><strong>医美 / 面部模特</strong></td><td>面部美学、皮肤管理模特、出镜素人招募，非餐饮、非普通护肤体验</td><td>排除</td></tr>
+          <tr><td><strong>收券 / 找搭子帖</strong></td><td>「收自助券」「蹲个搭子」「谁有券」，是个人求购/结伴，不是品牌招体验官</td><td>排除</td></tr>
+          <tr><td><strong>个人日记 / 攻略 / 避雷</strong></td><td>消费记录、打卡测评、避雷吐槽、经验分享，无报名入口和名额</td><td>排除</td></tr>
+          <tr><td><strong>中奖晒帖 / 已收官</strong></td><td>中奖者晒结果、「已结束 / 名额已满 / 已抽完」；正文日期与发布时间矛盾、模板未更新</td><td>排除或记待核，不投</td></tr>
+          <tr><td><strong>进群抽奖 / 群内公布</strong></td><td>「加福利群/活动群，群里随机抽、群内公布名单」，须本人进群</td><td>排除，助手不代加群</td></tr>
+          <tr><td><strong>先购买指定链接</strong></td><td>要先在海外/旗舰店下单指定产品，凭订单截图私信返样，非零成本</td><td>排除，属先买后返</td></tr>
+          <tr><td><strong>要本人已有素材</strong></td><td>评论区晒挂耳冲泡图、穿搭照、出镜实拍，要求自带成品内容</td><td>排除，当前无素材不硬蹭</td></tr>
+          <tr><td><strong>评论须@一位好友</strong></td><td>规则要求评论区@指定/任意好友参与，账号无可@对象</td><td>排除，不编造账号、不硬@</td></tr>
+          <tr><td><strong>邮费自理 / 到付</strong></td><td>产品免费但要自付 5 元邮费/到付，非纯零成本</td><td>排除，不垫邮费</td></tr>
+          <tr><td><strong>限外地同城到店</strong></td><td>只送某城市门店自提/到店（如青岛万达），武汉不送、无寄样</td><td>排除，外地只接全国包邮寄样</td></tr>
+          <tr><td><strong>纯带货商品帖 / 应援帖</strong></td><td>正文标售价、已售，全是产品介绍无招募入口；或全是明星话题标签、无规则</td><td>排除，不是体验官招募</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">2.4</span>过了门，按品类排先后</h2>
+    <p class="sub">排序只按一条：能不能写出差异、值不值得跑一趟。当前主攻餐饮吃饭。</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <colgroup><col style="width:14%"><col style="width:24%"><col style="width:62%"></colgroup>
+        <thead><tr><th>顺序</th><th>品类</th><th>为什么排这个位置</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-core">1</span></td><td>中餐正餐 / 融合菜 / 湖北菜</td><td>当前主攻。客单高，拍菜单和菜品最出片。</td></tr>
+          <tr><td><span class="tag tag-core">2</span></td><td>火锅 / 烧烤 / 串串</td><td>同城供给多，翻台快，约得上、出片稳。</td></tr>
+          <tr><td><span class="tag tag-core">3</span></td><td>自助 / 面馆小吃 / 大排档</td><td>门槛低、反馈快，用来补足当天家数。</td></tr>
+          <tr><td><span class="tag">4</span></td><td>饮品咖啡 / 酸奶甜品</td><td>最容易约上，穿插在正餐之间跑。</td></tr>
+          <tr><td><span class="tag">5</span></td><td>烘焙甜点 / 食品零食</td><td>出图轻，到店和寄样都有。</td></tr>
+          <tr><td><span class="tag">6</span></td><td>护肤寄样 / 水果生鲜</td><td>周期长、要等快递，排最后；同城线榨干后作为底仓顺带报。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">2.5</span>可复制指令</h2>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <span class="ptitle">指令 A｜一条帖过门判重</span>
+        <button class="copy-btn" type="button">复制</button>
+      </div>
+      <pre>我把这条招募帖的正文贴给你（或截图给你），按六道门逐条判，最后只给「报 / 不报」和一个理由，不要长篇分析。
+
+1. 时间：发布几号？是否 7 天内？有没有写已收官、已截止、名额已满？
+2. 钱：有没有押金、垫付、先买后返、团购、优惠券、付费合作、招商加盟、返现？
+3. 地点：武汉到店，还是外地？外地写了寄样/快递/邮寄/包邮吗？
+4. 人群：招女生素人，还是只招男士、宝妈、婴童、孕妇、宠物专用？
+5. 门槛：有没有要求千粉/500粉/300粉/2000粉、点评等级、往期作品？当前 166 粉够不够？
+6. 正文质量：去掉标题还有没有 40 字以上实质内容和报名入口？
+
+再判重：品牌、标题前 6–20 字、正文前 300 字、评论区有没有本人留言。
+
+结论格式：
+【报 / 不报】｜卡在第几道门｜一句话理由｜品类排序第几位｜是否与台账重复</pre>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <span class="ptitle">指令 B｜一批帖排优先级</span>
+        <button class="copy-btn" type="button">复制</button>
+      </div>
+      <pre>这批帖子都过了六道门、也不重复，帮我按品类排先后，一天最多 20 家。
+
+排序优先级：中餐正餐 → 火锅烧烤串串 → 自助/面馆小吃/大排档 → 饮品咖啡甜品 → 烘焙零食 → 护肤寄样/生鲜。
+同城线先排，寄样线放在同城之后当底仓。
+
+输出一张表：帖名｜品类｜武汉到店还是寄样｜建议排第几｜一句话理由（能不能写出差异、要不要跑一趟）。
+排不进前 20 的放「候补」，不要硬塞进当天名额。</pre>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="翻页">
+    <a class="prev" href="01-search.html">上一页 · 01 搜帖</a>
+    <a class="home" href="index.html">总览</a>
+    <a class="next" href="03-apply.html">下一页 · 03 四件套报名</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

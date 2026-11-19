@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 台账与复盘｜探店执行手册</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2317365D'/%3E%3Crect x='6' y='7' width='20' height='2.5' fill='%23FFFFFF'/%3E%3Crect x='6' y='14' width='14' height='2.5' fill='%23FFFFFF'/%3E%3Crect x='6' y='21' width='17' height='2.5' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">探店执行手册 <span class="en">Store Playbook</span></a>
+    <nav class="topnav" aria-label="模块导航">
+      <a href="index.html">总览</a>
+      <a href="01-search.html">01 搜帖</a>
+      <a href="02-gate.html">02 过门判重</a>
+      <a href="03-apply.html">03 报名</a>
+      <a href="04-ledger.html" aria-current="page">04 记账复盘</a>
+      <a href="05-deal.html">05 中签后</a>
+    </nav>
+  </div>
+</header>
+
+<main class="shell">
+
+  <div class="page-head">
+    <div class="crumb">04 / 05　LEDGER</div>
+    <h1>台账与复盘</h1>
+    <p class="goal">台账是判重的唯一依据，也是复盘唯一的证据。没写进台账的报名，等于没报。</p>
+  </div>
+
+  <section class="section" id="tool">
+    <h2><span class="idx">4.0</span>开工工具（本地运行 · 不联网）</h2>
+    <p class="sub">台账只在你本机解析，不上传。每天开工顺序：载入台账 → 查重 → 导出集合 → 再去搜帖。</p>
+
+    <div class="tool-block">
+      <label class="tool-label" for="ledgerFile">① 载入台账</label>
+      <div class="tool-row">
+        <input type="file" id="ledgerFile" accept=".md,.txt,.csv" class="tool-file">
+        <span class="tool-hint">选「探店报名台账_日期.md」；下次打开自动恢复</span>
+      </div>
+      <textarea id="ledgerPaste" class="tool-textarea" rows="3" placeholder="或把台账原文粘贴到这里，再点下面的按钮"></textarea>
+      <div class="tool-row">
+        <button class="copy-btn" type="button" id="loadPaste">解析粘贴内容</button>
+        <span class="tool-stat" id="toolStat">尚未载入台账</span>
+      </div>
+    </div>
+
+    <div class="tool-block" id="dashBlock">
+      <label class="tool-label">② 今日与卡点（自动算）</label>
+      <div id="dash"></div>
+    </div>
+
+    <div class="tool-block">
+      <label class="tool-label" for="queryInput">③ 判重查询</label>
+      <textarea id="queryInput" class="tool-textarea" rows="3" placeholder="一行一个品牌，也可用逗号分隔。例：戴先生和朋友们 / 南棠馆, 九十九里棠"></textarea>
+      <div class="tool-row">
+        <button class="copy-btn" type="button" id="runQuery">查重</button>
+        <span class="tool-hint">品牌能在台账里对上就是「已报过」，对不上才进六道门</span>
+      </div>
+      <div id="queryResult" class="tool-result"></div>
+    </div>
+
+    <div class="tool-block">
+      <label class="tool-label">④ 判重集合导出</label>
+      <div class="tool-row">
+        <button class="copy-btn" type="button" id="exportSet">生成集合</button>
+        <button class="copy-btn" type="button" id="copySet">复制集合</button>
+      </div>
+      <pre id="setOut" class="tool-pre">载入台账后点「生成集合」，得到全部报过的品牌；搜帖前先拿这份对照。</pre>
+    </div>
+
+    <div class="tool-block" id="genBlock">
+      <label class="tool-label">⑤ 新增一条 → 生成台账行</label>
+      <div class="field-grid">
+        <div class="field"><label for="fDate">日期</label><input type="date" id="fDate"></div>
+        <div class="field"><label for="fBatch">批次（自动）</label><input type="text" id="fBatch"></div>
+        <div class="field"><label for="fSeq">序号（自动）</label><input type="number" id="fSeq" min="1"></div>
+        <div class="field"><label for="fBrand">标准品牌名称 *</label><input type="text" id="fBrand" placeholder="不带门店后缀，判重看它"></div>
+        <div class="field"><label for="fProduct">产品名称</label><input type="text" id="fProduct" placeholder="如 双人餐"></div>
+        <div class="field"><label for="fActivity">招募活动名称</label><input type="text" id="fActivity" placeholder="如 1000位试吃官"></div>
+        <div class="field"><label for="fPub">招募发布时间</label><input type="text" id="fPub" placeholder="如 3天前"></div>
+        <div class="field"><label for="fSource">招募来源</label>
+          <select id="fSource"><option>小红书搜索</option><option>评论区</option><option>私信</option><option>其他</option></select>
+        </div>
+        <div class="field"><label for="fShop">店名</label><input type="text" id="fShop" placeholder="帖子标题原文，不改写"></div>
+        <div class="field"><label for="fCat">品类</label>
+          <input type="text" id="fCat" list="catList" placeholder="中餐正餐 / 火锅 / 饮品">
+          <datalist id="catList"></datalist>
+        </div>
+        <div class="field"><label for="fType">类型</label>
+          <select id="fType"><option>到店置换</option><option>到店领取</option><option>寄样试用</option><option>线下异地</option><option>非招募</option></select>
+        </div>
+        <div class="field"><label for="fSigned">是否中签</label>
+          <select id="fSigned"><option>待中签</option><option>已中签</option><option>未</option></select>
+        </div>
+        <div class="field"><label for="fRecv">已收货</label><select id="fRecv"><option>否</option><option>是</option></select></div>
+        <div class="field"><label for="fTried">已体验</label><select id="fTried"><option>否</option><option>是</option></select></div>
+        <div class="field"><label for="fPubd">已发布</label><select id="fPubd"><option>否</option><option>是</option></select></div>
+        <div class="field field-wide"><label for="fStatus">当前状态</label><input type="text" id="fStatus" value="已报名（关注✓赞✓藏✓评论✓）"></div>
+        <div class="field field-wide"><label for="fNote">备注</label><input type="text" id="fNote" placeholder="笔记ID、特殊要求、待补项"></div>
+      </div>
+      <div class="tool-row">
+        <button class="copy-btn" type="button" id="genRow">生成表格行</button>
+        <button class="copy-btn" type="button" id="copyRow">复制表格行</button>
+        <button class="copy-btn" type="button" id="copy17">复制17列单行</button>
+      </div>
+      <div id="genMsg"></div>
+      <pre id="rowOut" class="tool-pre">填好品牌后点「生成表格行」，或在品牌框直接按回车。</pre>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">4.1</span>文件落点（实际在用的两份）</h2>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <colgroup><col style="width:30%"><col style="width:42%"><col style="width:28%"></colgroup>
+        <thead><tr><th>文件</th><th>写什么</th><th>规则</th></tr></thead>
+        <tbody>
+          <tr><td><strong>探店报名台账_日期.md</strong></td><td>每报一家追加一条，17 列顺序固定；含通过待办、已完成批次、跳过/判重清单、待补段</td><td>批次按天编，三重键「批次+品牌+活动名」防重复追加</td></tr>
+          <tr><td><strong>探店复盘.html</strong></td><td>当天评论条数、有效家数、误投/跳过清单、风控记录、待补项</td><td>误投和跳过必须写，不能只写好数</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn">
+      <span class="note-title">写回前先备份</span>
+      每次写回前先复制一份带 <code>_bakMMDD</code> 的备份；写完核对条数，别覆盖掉历史批次。判废的也记进台账，状态写「已取消（原因）」，原因要具体。
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">4.2</span>17 列固定顺序（不许改）</h2>
+    <div class="prompt">
+      <div class="prompt-head">
+        <span class="ptitle">台账字段顺序 · 复制即用</span>
+        <button class="copy-btn" type="button">复制</button>
+      </div>
+      <pre>日期｜批次｜序号｜标准品牌名称｜产品名称｜招募活动名称｜招募发布时间｜招募来源｜店名｜品类｜类型｜是否中签｜当前状态｜是否已收货｜是否已体验｜是否已发布｜备注</pre>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <colgroup><col style="width:28%"><col style="width:44%"><col style="width:28%"></colgroup>
+        <thead><tr><th>字段</th><th>填什么</th><th>注意</th></tr></thead>
+        <tbody>
+          <tr><td>日期 / 批次 / 序号</td><td>2026-11-16｜第19批·11-16武汉免费体验/探店置换｜1、2、3…</td><td>批次按天编，序号当天从 1 起</td></tr>
+          <tr><td>标准品牌名称</td><td>品牌名，不带门店后缀</td><td>判重主要看这个</td></tr>
+          <tr><td>产品 / 活动名称</td><td>给的东西、活动名</td><td>如「双人餐」「1000 位试吃官」</td></tr>
+          <tr><td>发布时间 / 来源</td><td>几天前 / 小红书搜索</td><td>超 7 天的不该出现在这里</td></tr>
+          <tr><td>店名</td><td>帖子标题原文</td><td>不改写、不缩写</td></tr>
+          <tr><td>品类</td><td>中餐 / 火锅烧烤 / 自助小吃 / 饮品 / 甜品 / 零食 / 护肤寄样…</td><td>和品类排序用同一套词</td></tr>
+          <tr><td>类型</td><td>到店置换 / 到店领取 / 寄样试用 / 线下异地 / 非招募</td><td>异地线下也要记，标「已取消」</td></tr>
+          <tr><td>是否中签 / 当前状态</td><td>未 / 是｜已报名、待赴约、已取消（原因）</td><td>取消必须写原因</td></tr>
+          <tr><td>收货 / 体验 / 发布</td><td>未 / 是</td><td>这三项是复盘的分母</td></tr>
+          <tr><td>备注</td><td>笔记 ID、发布地、特殊要求、瑕疵、待补项</td><td>不写情绪</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">4.3</span>判重口径（与 02 页一致）</h2>
+    <ul class="points">
+      <li>三重比对：店名、标准品牌名称、招募活动名称，三个都对一遍。</li>
+      <li>同品牌跨门店视为重复；标题前 6–20 字、正文前 300 字兜底；评论区有本人留言即报过。</li>
+      <li>每天开工先把台账里的品牌、标题拉成判重集合，再去搜帖。</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">4.4</span>一周看四个数</h2>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <colgroup><col style="width:24%"><col style="width:40%"><col style="width:36%"></colgroup>
+        <thead><tr><th>指标</th><th>怎么算</th><th>看到不对怎么办</th></tr></thead>
+        <tbody>
+          <tr><td>报名数</td><td>当天新增条数，去掉取消的</td><td>连续两天不到 20，换关键词组，别死磕同一屏</td></tr>
+          <tr><td>中签率</td><td>中签数 ÷ 报名数</td><td>低于一成，回头看是不是品类太偏或粉丝门槛卡住</td></tr>
+          <tr><td>到店完成率</td><td>已体验 ÷ 待赴约</td><td>低于一半，说明约了没去，压缩一天的家数</td></tr>
+          <tr><td>出稿率</td><td>已发布 ÷ 已体验</td><td>出稿为 0 就是白跑，出稿是唯一产出</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note danger">
+      <span class="note-title">别拿报名量当成绩</span>
+      <ul>
+        <li>报了 300 家、一篇没发，等于零。</li>
+        <li>复盘只认三样：去成了几家、发了几篇、有没有带来真实合作。</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2><span class="idx">4.5</span>可复制指令</h2>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <span class="ptitle">指令 A｜把今天的报名写进台账</span>
+        <button class="copy-btn" type="button">复制</button>
+      </div>
+      <pre>把今天这批发进台账，一条记录不要漏字段。
+
+【字段顺序，固定】
+日期｜批次｜序号｜标准品牌名称｜产品名称｜招募活动名称｜招募发布时间｜招募来源｜店名｜品类｜类型｜是否中签｜当前状态｜是否已收货｜是否已体验｜是否已发布｜备注
+
+【填写要求】
+- 日期写 2026-11-16 这种格式，批次写成「第N批·MM-DD武汉免费体验/探店置换」。
+- 店名用帖子标题原文，不要改写、不要缩写；备注记笔记 ID 和瑕疵。
+- 类型：到店置换 / 到店领取 / 寄样试用 / 线下异地 / 非招募。
+- 判废的也写进去，状态写「已取消（原因）」，原因要具体：异地线下、同品牌重复、只有标签、抽奖帖、待核。
+- 写回前先备份一份 _bakMMDD。
+
+写完告诉我：今天总条数、有效报名几家、取消几家、分别是什么原因。</pre>
+    </div>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <span class="ptitle">指令 B｜一天收工复盘</span>
+        <button class="copy-btn" type="button">复制</button>
+      </div>
+      <pre>今天收工，按四个数给我复盘，不要写成长篇。
+
+1. 报名：有效几家，比 20 差多少，差在哪（关键词榨干 / 门槛不够 / 时间不够）。
+2. 中签：今天新中签几家，是哪几家，有没有时限。
+3. 到店：多少家待赴约，最早哪家到期，今天该回谁的消息。
+4. 出稿：这周发了几篇，还有几张图压着没发。
+
+最后给我明天第一件事做什么，一句话，不要列清单。没报够就如实说，不拿旧帖外地帖凑数。</pre>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="翻页">
+    <a class="prev" href="03-apply.html">上一页 · 03 四件套报名</a>
+    <a class="home" href="index.html">总览</a>
+    <a class="next" href="05-deal.html">下一页 · 05 中签后收口</a>
+  </nav>
+
+</main>
+
+<script src="js/ledger-tool.js"></script>
+<script src="js/ledger-dash.js"></script>
+<script src="js/ledger-form.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
